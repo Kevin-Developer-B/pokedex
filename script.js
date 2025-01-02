@@ -1,11 +1,18 @@
+const BASE_URL = 'https://pokeapi.co/api/v2/pokemon?limit=100&offset=0'
+
+
 function init() {
     loadContent()
     loadPokeData()
 }
 
 async function loadPokeData() {
-    let responsePokeDatas = await fetch('https://pokeapi.co/api/v2/pokemon?limit=100&offset=0');
+    let responsePokeDatas = await fetch(BASE_URL);
     let responseAsJson = await responsePokeDatas.json();
+    let pokeKeysArray = Object.keys(responseAsJson)
+
+    console.log(pokeKeysArray);
+    
     return new Promise((resolve, reject) => {
         setTimeout(() => {
         if (Object.keys(responseAsJson).length === 0) {
@@ -25,9 +32,19 @@ function loadContent() {
     contentRef.innerHTML = getTemplateContent();
 }
 
-function CreatPokeContent(results) {
+async function loadPokeImages(url) {
+    // Abrufen der Details für das Pokémon
+    let detailsResponse = await fetch(url);
+    let detailsData = await detailsResponse.json();
+
+    // Zugriff auf das Bild (sprites.front_default)
+    return detailsData.sprites.front_default;
+}
+
+async function CreatPokeContent(results) {
     let pokeData = document.getElementById('poke_cards');
     for (let index = 0; index < results.length; index++) {
-        pokeData.innerHTML += getTemplatePokeData(results, index);
+        pokeData.innerHTML += await getTemplatePokeData(results, index);
     }
 }
+

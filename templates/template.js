@@ -18,18 +18,17 @@ return `
 `
 }
 
-
-
-
-
-
-
-
-
-function getTemplatePokeData(results, index) {
+async function getTemplatePokeData(results, index) {
+    let pokemonImage = await loadPokeImages(results[index].url);
 return `
     <div class="cards">
-        <p style="color: white">#${results[index].id} ${results[index].name}</p>
+        <div>
+            <h3>#${index + 1} ${results[index].name}</h3>
+        </div>
+        <div class="image-container">
+            <button><img src="${pokemonImage}" alt=""></button>
+        </div>
+        <div></div>
     </div>
 `
 }
