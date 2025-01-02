@@ -19,16 +19,26 @@ return `
 }
 
 async function getTemplatePokeData(results, index) {
-    let pokemonImage = await loadPokeImages(results[index].url);
+    let pokeData = await getPokeData(results, index);
 return `
     <div class="cards">
-        <div>
-            <h3>#${index + 1} ${results[index].name}</h3>
+        <div class="text-container">
+            <P>#${index + 1}</p> <p>${pokeData.pokemonName}</p>
         </div>
-        <div class="image-container">
-            <button><img src="${pokemonImage}" alt=""></button>
+        <div class="image-container ${pokeData.pokemonType}">
+            <button class="image-btn">
+            <img class="image" src="${pokeData.pokemonImage}" alt="">
+        </button>
         </div>
-        <div></div>
+        <div class="type-icon">
+            <button>
+                <img class="type-image" src="${pokeData.primaryTypeImagePath}" alt="Primary Type">
+                ${pokeData.secondaryTypeImagePath 
+                    ? `<img class="type-image" src="${pokeData.secondaryTypeImagePath}" alt="Secondary Type">`
+                    : ''}
+            </button>
+        </div>
+        
     </div>
 `
 }

@@ -1,0 +1,56 @@
+/* colors.css */
+.grass {
+    background-color: green;
+}
+
+.fire {
+    background-color: red;
+}
+
+.water {
+    background-color: blue;
+}
+
+.electric {
+    background-color: yellow;
+}
+
+.psychic {
+    background-color: rgb(255, 0, 255);
+}
+
+.poison {
+    background-color: rgb(51, 1, 51);
+}
+
+.bug {
+    background-color: lime;
+}
+
+.ground{
+    background-color: rgb(141, 81, 13);
+}
+
+.fairy{
+    background-color: rgb(191, 156, 223);
+}
+
+.fighting{
+    background-color: rgb(216, 125, 20);
+}
+
+.rock{
+    background-color: rgb(134, 101, 101);
+}
+
+.ghost{
+    background-color: rgb(128, 47, 128);
+}
+
+.normal {
+    background-color: gray;
+}
+
+.default {
+    background-color: gray; /* Standardfarbe */
+}

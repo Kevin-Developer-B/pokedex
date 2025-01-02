@@ -9,10 +9,7 @@ function init() {
 async function loadPokeData() {
     let responsePokeDatas = await fetch(BASE_URL);
     let responseAsJson = await responsePokeDatas.json();
-    let pokeKeysArray = Object.keys(responseAsJson)
 
-    console.log(pokeKeysArray);
-    
     return new Promise((resolve, reject) => {
         setTimeout(() => {
         if (Object.keys(responseAsJson).length === 0) {
@@ -39,6 +36,47 @@ async function loadPokeImages(url) {
 
     // Zugriff auf das Bild (sprites.front_default)
     return detailsData.sprites.front_default;
+}
+
+async function loadPokeDetails(url) {
+    // Abrufen der Details für das Pokémon
+    let detailsResponse = await fetch(url);
+    let detailsData = await detailsResponse.json();
+
+    // Zugriff auf die Typen
+    let primaryType = detailsData.types[0]?.type.name || 'normal'; // Erster Typ oder Standard
+    let secondaryType = detailsData.types[1]?.type.name || '';     // Zweiter Typ oder leer
+
+
+    // Zugriff auf das Bild
+    let pokemonImage = detailsData.sprites.front_default;
+
+    // Rückgabe der Details
+    return {
+        pokemonImage,
+        primaryType,
+        secondaryType
+    };
+}
+
+async function getPokeData(results, index) {
+    // Details des Pokémons abrufen (Bild und Typ)
+    let pokeDetails = await loadPokeDetails(results[index].url);
+
+    // Bildpfade für Primary- und Secondary-Typen vorbereiten
+    let primaryTypeImagePath = `assets/images/${pokeDetails.primaryType}.png`;
+    let secondaryTypeImagePath = pokeDetails.secondaryType
+        ? `assets/images/${pokeDetails.secondaryType}.png`
+        : ''; // Falls kein zweiter Typ vorhanden ist, bleibt der Pfad leer.
+
+    // Rückgabe der gesammelten Daten als Objekt
+    return {
+        pokemonImage: pokeDetails.pokemonImage,
+        pokemonName: results[index].name,
+        pokemonType: pokeDetails.primaryType,
+        primaryTypeImagePath,
+        secondaryTypeImagePath
+    };
 }
 
 async function CreatPokeContent(results) {
