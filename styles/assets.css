@@ -6,6 +6,23 @@ button{
 
 .image-btn{
     padding: 0;
-    height: 200px;
-    width: 200px;
+    height: 205px;
+    width: 210px;
+}
+
+.overlay-container-button{
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.info-btn{
+    padding: 10px 45.5px;
+    background-color: aqua;
+}
+
+.info-btn:hover {
+    background-color: lightseagreen; /* Optional: Hover-Effekt */
+    transition: 200ms ease-in-out;
 }

@@ -1,0 +1,41 @@
+.overlay {
+    background-color: rgba(0, 0, 0, 0.486);
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.d-none{
+    display: none;
+}
+
+.overlay-container{
+    height: 600px;
+    width: 400px;
+    background-color: rgb(171, 196, 166);
+}
+
+h2{
+    text-align: center;
+    padding-top: 10px;
+}
+
+.image-position{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.overlay-image{
+    height: 200px;
+}
+
+.informaition-content{
+    background-color: blueviolet;
+    height: 215px;
+    width: 100%;
+}

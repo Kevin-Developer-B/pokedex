@@ -42,20 +42,12 @@ async function loadPokeDetails(url) {
     // Abrufen der Details für das Pokémon
     let detailsResponse = await fetch(url);
     let detailsData = await detailsResponse.json();
+    // console.log(detailsData); // Überprüfe hier die Struktur der API-Antwort
 
-    // Zugriff auf die Typen
-    let primaryType = detailsData.types[0]?.type.name || 'normal'; // Erster Typ oder Standard
-    let secondaryType = detailsData.types[1]?.type.name || '';     // Zweiter Typ oder leer
-
-
-    // Zugriff auf das Bild
-    let pokemonImage = detailsData.sprites.front_default;
-
-    // Rückgabe der Details
     return {
-        pokemonImage,
-        primaryType,
-        secondaryType
+        pokemonImage: detailsData.sprites.front_default,
+        primaryType: detailsData.types[0]?.type.name || 'normal',
+        secondaryType: detailsData.types[1]?.type.name || '',
     };
 }
 
@@ -75,7 +67,7 @@ async function getPokeData(results, index) {
         pokemonName: results[index].name,
         pokemonType: pokeDetails.primaryType,
         primaryTypeImagePath,
-        secondaryTypeImagePath
+        secondaryTypeImagePath,
     };
 }
 
@@ -86,3 +78,34 @@ async function CreatPokeContent(results) {
     }
 }
 
+function toggleOverlay(pokemonName = '', pokemonImage = '', pokemonType = '', primaryTypeImagePath = '', secondaryTypeImagePath = '', index = '', pokemonData = '') {
+    let refOverlay = document.getElementById('overlay');
+    refOverlay.classList.toggle('d-none');
+    let refOverlayContainer = document.getElementById('overlayContainer');
+    refOverlayContainer.innerHTML = getOverlayContainer(pokemonName, pokemonImage, pokemonType, primaryTypeImagePath, secondaryTypeImagePath, index);
+
+    showInfoMain()
+}
+
+function showInfoMain() {
+    let refInformationMain = document.getElementById('infoMain');
+    refInformationMain.innerHTML = getInfoTemplateMain();
+    document.getElementById('infoStats').innerHTML = '';
+    document.getElementById('infoEvoChain').innerHTML = '';
+}
+
+function showInfoStats() {
+    let refInformationStats = document.getElementById('infoStats');
+    refInformationStats.innerHTML = getInfoTemplateStats();
+    // Leere die anderen Container (falls sie vorher gesetzt wurden)
+    document.getElementById('infoMain').innerHTML = '';
+    document.getElementById('infoEvoChain').innerHTML = '';
+}
+
+function showInfoEvoChain() {
+    let refInformationEvoChain = document.getElementById('infoEvoChain');
+    refInformationEvoChain.innerHTML = getInfoTemplateEvoChain();
+    // Leere die anderen Container (falls sie vorher gesetzt wurden)
+    document.getElementById('infoMain').innerHTML = '';
+    document.getElementById('infoStats').innerHTML = '';
+}
