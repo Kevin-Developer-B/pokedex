@@ -1,0 +1,29 @@
+body{
+    scroll-behavior: smooth;
+    background-color: black;
+    color: white;
+
+    margin: 0;
+    height: 100vh;
+    width: 100%;
+}
+
+header{
+    margin: 30px 40px;
+}
+
+.headline{
+    max-width: 1940px;
+    margin: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.icon-name{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+

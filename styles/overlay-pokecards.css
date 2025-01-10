@@ -1,0 +1,132 @@
+.overlay-container{
+    height: 600px;
+    width: 400px;
+    background-color: rgb(171, 196, 166);
+    position: relative;
+}
+
+.overlay-pokename-position{
+    display: flex;
+    gap: 140px;
+    font-size: larger;
+    font-weight: 700;
+    padding-left: 10px;
+}
+
+.image-position{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.overlay-image{
+    height: 200px;
+}
+
+.informaition-content{
+    background-color: blueviolet;
+    height: 215px;
+    width: 100%;
+}
+
+h1{
+    margin: 0;
+}
+
+.details-container {
+    height: 230px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+
+}
+
+.details-container p {
+    margin: 3px 0;
+    font-size: 14px;
+    color: #555;
+}
+
+.details-container p strong {
+    font-weight: bold;
+}
+
+.main-position {
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.main-position {
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.main-position p {
+    margin: 0;
+    font-size: 14px;
+    color: #555;
+    display: grid;
+    grid-template-columns: auto 1fr; 
+    align-items: center;
+}
+
+
+.main-position p strong {
+    min-width: 105px; 
+    display: inline-block;
+    font-weight: bold;
+}
+
+.main-position p span {
+    justify-self: flex-start;
+}
+
+.stats-position{
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-bar {
+    height: 10px;
+    background-color: #4CAF50;
+    border-radius: 5px;
+}
+
+.evo-chain-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.overlay-evolution-img{
+    height: 80px;
+}
+
+.evolution-container {
+    display: flex; 
+    flex-direction: row; 
+    align-items: center; 
+    justify-content: center; 
+    gap: 1rem; 
+    flex-wrap: nowrap;
+    height: 180px;
+}
+
+.evolution-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.bracket {
+    font-size: 50px;
+}
