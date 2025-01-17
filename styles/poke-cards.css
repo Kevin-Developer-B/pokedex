@@ -10,7 +10,7 @@
 
 
 .cards{
-    height: 250px;
+    height: 280px;
     width: 200px;
 
     margin: 20px;
@@ -43,6 +43,7 @@
 }
 
 .type-icon {
+    margin-top: 20px;
     display: flex;
     justify-content: center;
 }
