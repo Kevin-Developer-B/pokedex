@@ -4,10 +4,12 @@ let pokemonRenderList = [];
 
 
 async function init() {
-    await allPokemons()
+    await content();
+    await loadSpinner(true);
+    await allPokemons();
     pokemonRenderList = loadAllPokemons;
-    await content()
-    await render()
+    await render();
+    await loadSpinner(false);
 };
 
 async function allPokemons() {
@@ -27,6 +29,17 @@ async function allPokemons() {
     } 
 };
 
+async function loadSpinner(isLoading) {
+    const spinner = document.getElementById('loading-spinner');
+    if (spinner) {
+        if (isLoading) {
+            spinner.classList.remove('d-none');
+        } else {
+            spinner.classList.add('d-none');
+        }
+    }
+}
+
 async function content() {
     let refContent = document.getElementById("content");
     refContent.innerHTML = await getTemplateLoadContent();
@@ -34,21 +47,21 @@ async function content() {
 };
 
 function filter() {
-    const searchQuery = document.getElementById("pokemon-search").value.toLowerCase();
-    if (searchQuery.length < 1) {
-        pokemonRenderList = loadAllPokemons;
-    } else {
+    let filterInput = document.getElementById("filterInput");
+    let filterword = filterInput.value.toLowerCase();
+    if (filterword.length >= 1) {
         pokemonRenderList = loadAllPokemons.filter(pokemon => 
-            pokemon.pokemonData.name.toLowerCase().startsWith(searchQuery)
+            pokemon.pokemonData.name.toLowerCase().startsWith(filterword)
         );
+    } else {
+        pokemonRenderList = loadAllPokemons;
     }
-    const cardsContainer = document.getElementById('pokeCards');
-    cardsContainer.innerHTML = '';
     render();
 }
 
 async function render() {
     let refCreatPokeContent = document.getElementById('pokeCards');
+    refCreatPokeContent.innerHTML = "";
     for (let index = 0; index < pokemonRenderList.length; index++) {
         refCreatPokeContent.innerHTML += await getTemplateCreatPokeCards(index);
     } 
