@@ -51,6 +51,22 @@
     background-color: gray;
 }
 
+.ice {
+    background-color: rgb(35, 182, 182);
+}
+
+.dragon {
+    background-color: rgb(59, 5, 121);
+}
+
+.dark {
+    background-color: rgb(33, 30, 36);
+}
+
+.steel {
+    background-color: rgb(151, 150, 151);
+}
+
 .default {
     background-color: gray; /* Standardfarbe */
 }

@@ -26,10 +26,63 @@
     border-bottom: 2px solid transparent;
 }
 
+.close-button{
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+
+    font-size: 20px;
+    color: white;
+}
+
+.close-button:hover{
+    color: black;
+    transition: 225ms ease-in-out;
+}
+
 .overlay-button.active {
     border-bottom: 2px solid #4CAF50;
 }
 
 .overlay-button:not(.active):hover {
     background-color: #e0e0e0;
+}
+
+.load-more-button {
+    display: flex;
+    margin: 30px auto;
+    padding: 10px 20px;
+    background-color: #b3b2ae;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.load-more-button:hover {
+    background-color: #f5b700;
+}
+
+.navigation-buttons{
+    display: flex;
+    justify-content: space-around;
+
+    padding-top: 8px;
+}
+
+.nav-button{
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 100px;
+    border: none;
+
+    font-size: 20px;
+}
+
+.nav-button:hover{
+    background-color: #b4b4b1;
+    color: white;
+    transition: 175ms ease-in-out;
 }

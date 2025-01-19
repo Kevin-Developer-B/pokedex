@@ -1,5 +1,5 @@
 .overlay-container{
-    height: 600px;
+    height: 700px;
     width: 400px;
     background-color: rgb(171, 196, 166);
     position: relative;
@@ -7,10 +7,10 @@
 
 .overlay-pokename-position{
     display: flex;
-    gap: 140px;
+justify-content: space-between;
     font-size: larger;
     font-weight: 700;
-    padding-left: 10px;
+    padding: 10px;
 }
 
 .image-position{
@@ -65,7 +65,7 @@ h1{
     border-radius: 5px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 15px;
 }
 
 .main-position p {
@@ -73,13 +73,13 @@ h1{
     font-size: 14px;
     color: #555;
     display: grid;
-    grid-template-columns: auto 1fr; 
+    grid-template-columns: auto 0.8fr; 
     align-items: center;
 }
 
 
 .main-position p strong {
-    min-width: 105px; 
+    min-width: 120px; 
     display: inline-block;
     font-weight: bold;
 }
@@ -123,7 +123,7 @@ h1{
 
 .overlay-evolution-img {
     height: 80px;
-    margin-bottom: 5px; /* Abstand zwischen Bild und Name */
+    margin-bottom: 5px;
 }
 
 .evo-name {
@@ -134,9 +134,30 @@ h1{
 
 .arrow {
     font-size: 20px;
-    margin: 0 10px; /* Abstand zwischen Pfeil und Stufen */
+    margin: 0 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #333; /* Pfeilfarbe */
+    color: #333;
+}
+
+@media(max-width: 450px){
+    .overlay-container{
+        height: 700px;
+        width: 300px;
+        background-color: rgb(171, 196, 166);
+        position: relative;
+    }
+
+    .overlay-pokename-position {
+        gap: 80px;
+    }
+
+    .evolution-container {
+       gap: 0;
+    }
+
+    .arrow {
+        margin: 0px;
+    }
 }

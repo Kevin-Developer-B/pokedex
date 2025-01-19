@@ -6,10 +6,13 @@ body{
     margin: 0;
     height: 100vh;
     width: 100%;
+
+    font-family: "Rubik";
 }
 
 header{
-    margin: 30px 40px;
+    padding-top: 20px;
+    margin: 0px 30px;
 }
 
 .headline{
@@ -27,11 +30,16 @@ header{
     gap: 10px;
 }
 
+main{
+    margin-bottom: 58px;
+}
+
 .spinner-position{
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+
 #loading-spinner {
     position: fixed;
     top: 50%;
@@ -65,4 +73,17 @@ header{
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.no-results {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 18px;
+    color: #ff0000;
+}
+
+@media(max-width: 450px){
+    .headline{
+        flex-direction: column;
+    }
 }

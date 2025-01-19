@@ -1,36 +1,58 @@
 const BASE_URL = "https://pokeapi.co/api/v2/pokemon/";
 let loadAllPokemons = [];
 let pokemonRenderList = [];
-
+let displayedPokemons = 0; 
+const POKEMONS_INCREMENT = 20;
 
 async function init() {
     await content();
     await loadSpinner(true);
-    await allPokemons();
+    await loadMorePokemons();
     pokemonRenderList = loadAllPokemons;
     await render();
     await loadSpinner(false);
 };
 
-async function allPokemons() {
-    for (let index = 1; index < 20; index++) {
+async function loadMorePokemons() {
+    let nextBatchStart = displayedPokemons + 1;
+    let nextBatchEnd = displayedPokemons + POKEMONS_INCREMENT;
+    for (let index = nextBatchStart; index <= nextBatchEnd; index++) {
+        let combinedData = await allPokeData(index);
+        if (combinedData) {
+            loadAllPokemons.push(combinedData);
+        }
+    }
+    displayedPokemons += POKEMONS_INCREMENT;
+    await render();
+    if (displayedPokemons >= 40) {
+        let loadMoreButton = document.getElementById('loadMoreButton');
+        if (loadMoreButton) {
+            loadMoreButton.remove();
+        }
+    }
+}
+
+async function allPokeData(index) {
+    try {
         let response = await fetch(BASE_URL + index);
         let responseToJson = await response.json();
         let speciesPokemon = await fetch(responseToJson.species.url);
         let responseSpeciesPokemon = await speciesPokemon.json();
         let pokeEvolutionChain = await fetch(responseSpeciesPokemon.evolution_chain.url);
         let responsePokeEvolutionChain = await pokeEvolutionChain.json();
-        let combinedData = {
+        return {
             pokemonData: responseToJson,
             speciesData: responseSpeciesPokemon,
-            evolutionChain: responsePokeEvolutionChain, 
+            evolutionChain: responsePokeEvolutionChain,
         };
-        loadAllPokemons.push(combinedData);
-    } 
-};
+    } catch (error) {
+        console.error(`Fehler beim Laden von Pokémon #${index}:`, error);
+        return null;
+    }
+}
 
 async function loadSpinner(isLoading) {
-    const spinner = document.getElementById('loading-spinner');
+    let spinner = document.getElementById('loading-spinner');
     if (spinner) {
         if (isLoading) {
             spinner.classList.remove('d-none');
@@ -43,37 +65,47 @@ async function loadSpinner(isLoading) {
 async function content() {
     let refContent = document.getElementById("content");
     refContent.innerHTML = await getTemplateLoadContent();
-    
 };
 
 function filter() {
     let filterInput = document.getElementById("filterInput");
     let filterword = filterInput.value.toLowerCase();
-    if (filterword.length >= 1) {
+    let refCreatPokeContent = document.getElementById('pokeCards');
+    if (filterword.length >= 3) {
         pokemonRenderList = loadAllPokemons.filter(pokemon => 
             pokemon.pokemonData.name.toLowerCase().startsWith(filterword)
         );
     } else {
         pokemonRenderList = loadAllPokemons;
     }
-    render();
+    if (pokemonRenderList.length === 0) {
+        refCreatPokeContent.innerHTML = `
+            <div class="no-results">
+                <p>Kein Pokémon gefunden. Bitte überprüfe die Eingabe oder versuche es mit einem anderen Namen.</p>
+            </div>
+        `;
+    } else {
+        render();
+    }
 }
 
 async function render() {
     let refCreatPokeContent = document.getElementById('pokeCards');
     refCreatPokeContent.innerHTML = "";
-    for (let index = 0; index < pokemonRenderList.length; index++) {
+    for (let index = 0; index < Math.min(displayedPokemons, pokemonRenderList.length); index++) {
         refCreatPokeContent.innerHTML += await getTemplateCreatPokeCards(index);
-    } 
-};
+    }
+}
 
 async function toggleOverlay(index) {
     let refOverlay = document.getElementById('overlay');
     refOverlay.classList.toggle('d-none');
-    createOverlayPokeCard(index)
+    if (!refOverlay.classList.contains('d-none') && pokemonRenderList[index]) {
+        await createOverlayPokeCard(index);
+    }
 }
 
-function createOverlayPokeCard(index) {
+async function createOverlayPokeCard(index) {
     let refOverlayContainer = document.getElementById('overlayContainer');
     refOverlayContainer.innerHTML = getOverlayContainer(index);
     showMain(index)
@@ -140,4 +172,13 @@ function showStatsWithActiveState(button, index) {
 function showEvoChainWithActiveState(button, index) {
     setActiveButton(button); 
     showEvoChain(index); 
+}
+
+function switchPokemon(currentIndex, direction) {
+    const newIndex = currentIndex + direction;
+    if (newIndex >= 0 && newIndex < pokemonRenderList.length) {
+        const refOverlayContainer = document.getElementById('overlayContainer');
+        refOverlayContainer.innerHTML = getOverlayContainer(newIndex);
+        showMain(newIndex);
+    }
 }
