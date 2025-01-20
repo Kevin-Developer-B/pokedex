@@ -7,7 +7,7 @@ async function getTemplateLoadContent() {
                 <h2>Pokedex</h2>
             </div>
             <div>
-                <input type="text" id="filterInput" oninput="filter()" placeholder="Pokémon suchen...">
+                <input type="text" id="filterInput" oninput="filter()" placeholder="search Pokémon...">
             </div>
         </div>
     </header>
@@ -19,7 +19,9 @@ async function getTemplateLoadContent() {
     </div>
     <main>
         <div id="pokeCards" class="cards-position"></div>
-        <button id="loadMoreButton" class="load-more-button d-none" onclick="loadMorePokemons()">Mehr anzeigen</button>
+        <div class="load-more-button-container">
+            <button id="loadMoreButton" class="load-more-button" onclick="loadMorePokemons()">show more</button>
+        </div>
     </main>
     <footer></footer>
     <div id="overlay" class="overlay d-none" onclick="toggleOverlay()">

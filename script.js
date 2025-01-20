@@ -14,6 +14,7 @@ async function init() {
 };
 
 async function loadMorePokemons() {
+    await loadSpinner(true);
     let nextBatchStart = displayedPokemons + 1;
     let nextBatchEnd = displayedPokemons + POKEMONS_INCREMENT;
     for (let index = nextBatchStart; index <= nextBatchEnd; index++) {
@@ -23,13 +24,8 @@ async function loadMorePokemons() {
         }
     }
     displayedPokemons += POKEMONS_INCREMENT;
+    await loadSpinner(false);
     await render();
-    if (displayedPokemons >= 40) {
-        let loadMoreButton = document.getElementById('loadMoreButton');
-        if (loadMoreButton) {
-            loadMoreButton.remove();
-        }
-    }
 }
 
 async function allPokeData(index) {
